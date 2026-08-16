@@ -1,39 +1,102 @@
-# PortfolioX - Professional Portfolio Builder
+# PortfolioX — Portfolio & Resume Builder Platform
 
-A complete full-stack application for creating, customizing, and sharing professional portfolios.
+A full-stack platform for building, publishing, and sharing professional portfolios and resumes — with AI-assisted content generation, a social layer (follows, likes, comments), appointment booking, subscription billing, and a full admin back office.
 
 ## 🚀 Features
 
-- **User Authentication**: JWT-based auth with refresh tokens
-- **Portfolio Builder**: Drag-and-drop portfolio customization
-- **Multiple Templates**: 6 industry-specific portfolio templates
-- **Admin Dashboard**: Manage users and view analytics
-- **ATS Optimization**: Resume-optimized layouts
-- **Public Portfolios**: Publish and share your work
-- **Analytics**: Track portfolio views and engagement
-- **Subscriptions**: Free and Pro plans with different features
+### Portfolios
+- 10 industry-specific templates (Developer, Doctor, Lawyer, Photographer, Graphic Designer, Writer, Musician, Architect, Fitness Trainer, Chef)
+- Projects (with a build/progress log per project), skills, work experience, education, photo gallery, and a "books" section for authors
+- Appointment booking with visitor-facing availability slots
+- Public contact form on published portfolios
+- Portfolio scoring (completeness/quality score) and view analytics
+- Publish/unpublish with a public shareable slug
+
+### Social
+- Explore/discover public portfolios
+- Follow / followers
+- Likes and threaded comments (with replies and comment likes) on portfolios
+
+### Resumes
+- Multi-resume builder with experience, education, and skills sections
+- ATS (Applicant Tracking System) scoring
+
+### AI Assistance
+- Chat-based assistant for portfolio and resume content
+- AI-suggested templates
+- AI-generated portfolio and resume content
+- Per-user AI credit/usage tracking
+- Pluggable providers — Groq and Gemini
+
+### Auth & Account Security
+- JWT access + refresh tokens
+- Email OTP verification on registration
+- New-device login verification via email (trusted-device management)
+- Password reset via OTP
+- Login audit history
+- Profile photo upload, email-change confirmation flow
+- Account data export and account deletion
+- Logout from all devices
+
+### Billing
+- Razorpay integration (create order, verify payment)
+- Free / Pro subscription plans, upgrade & downgrade
+- Payment history
+
+### Admin Dashboard
+- User management: ban/unban, approve, delete, delete-inactive
+- Analytics and platform stats
+- User complaints and bug report triage
+- Subscription plan management and payment refunds
+- Email template editor with live preview
+- System tools: storage usage, backup, error log viewer
+- Site-wide settings (branding, registration/security policy, feature toggles)
 
 ## 📋 Tech Stack
 
 ### Frontend
-- React 18
-- React Router v6
-- Axios (HTTP client)
+- React 18 + React Router v6
+- Vite
 - Tailwind CSS
-- Lucide React (icons)
+- Axios
+- Lucide React / react-icons
+- Playwright (testing)
 
 ### Backend
-- .NET 8
-- Entity Framework Core
-- MySQL
-- JWT Authentication
+- .NET 8 Web API
+- Entity Framework Core 8 (Pomelo MySQL provider) with **EF Core Migrations**
+- JWT Bearer authentication
+- BCrypt.Net (password hashing)
 - AutoMapper
-- BCrypt (password hashing)
+- Serilog
+- Swagger / OpenAPI
 
 ### Database
 - MySQL 8.0
-- Normalized schema
-- 17 tables
+- Schema is defined entirely in code (EF Core entities) and applied via versioned migrations — no hand-written SQL files
+
+## 🏗️ Architecture
+
+**Backend** — a 4-project .NET solution ([PortfolioX.sln](backend/PortfolioX.sln)):
+
+| Project | Responsibility |
+|---|---|
+| `PortfolioX.API` | Controllers, `Program.cs` (DI wiring, middleware, startup), Swagger |
+| `PortfolioX.Core` | Domain entities and DTOs |
+| `PortfolioX.Infrastructure` | `AppDbContext`, EF Core Migrations (schema source of truth) |
+| `PortfolioX.Services` | Business logic — auth, email, AI providers, portfolio/resume scoring, Razorpay, notifications |
+
+**Frontend** — a Vite-powered React SPA:
+
+```
+frontend/src/
+├── pages/            # Route-level pages (Dashboard, Login, Register, AiPortfolioBuilder, AdminDashboard, ...)
+│   └── templates/     # One renderer per portfolio template (Developer, Doctor, Lawyer, ...)
+├── components/        # Shared UI (Navbar, Sidebar, Footer, modals, charts, ...)
+├── context/            # AuthContext, ThemeContext, AppearanceContext, SiteSettingsContext
+├── services/           # API client (Axios)
+├── hooks/, utils/, styles/
+```
 
 ## 🔧 Prerequisites
 
@@ -44,18 +107,18 @@ A complete full-stack application for creating, customizing, and sharing profess
 
 ## ⚡ Quick Start
 
-### 1. Database Setup
+### 1. Database
 
-Ensure MySQL is installed and running locally. No manual schema setup is needed — the schema is managed with EF Core Migrations and applied automatically on startup (see below).
+Ensure MySQL is running locally. No manual schema setup is needed — EF Core Migrations create the database and every table automatically on first run.
 
-### 2. Backend Setup
+### 2. Backend
 
 ```bash
 cd backend
 
-# appsettings.json ships with placeholder values only (no real secrets are
-# committed to this repo). Create src/PortfolioX.API/appsettings.Development.json
-# (gitignored) with your real local values, e.g.:
+# appsettings.json in this repo ships with placeholder values only — no real
+# secrets are committed. Create src/PortfolioX.API/appsettings.Development.json
+# (gitignored) with your real local values:
 # {
 #   "ConnectionStrings": { "DefaultConnection": "Server=localhost;Port=3306;Database=portfoliox_db;Uid=root;Pwd=your_password;" },
 #   "Jwt": { "Secret": "a-random-32+-character-string" },
@@ -63,207 +126,114 @@ cd backend
 #   "Ai": { "ApiKey": "..." },
 #   "Razorpay": { "KeyId": "...", "KeySecret": "..." }
 # }
-# ASP.NET Core merges this file automatically in Development.
+# ASP.NET Core merges this file automatically when running in Development.
 
-# Build and run — EF Core Migrations create the database/schema automatically
-# on startup (Program.cs calls context.Database.Migrate()), and demo/seed
-# data (templates, plans, email templates, admin/test accounts) is inserted
-# in code the first time it runs.
 dotnet build
 dotnet run --project src/PortfolioX.API
 
-# API runs on http://localhost:5000
-# Swagger docs: http://localhost:5000/swagger
+# API:     http://localhost:5000
+# Swagger: http://localhost:5000/swagger
 ```
 
-### 3. Frontend Setup
+On startup, `Program.cs` calls `context.Database.Migrate()` to create/update the schema, then seeds portfolio templates, subscription plans, email templates, and the demo accounts below — all in code, idempotently (safe to restart repeatedly).
+
+### 3. Frontend
 
 ```bash
 cd frontend
-
-# Install dependencies
 npm install
-
-# Create .env file
 cp .env.example .env
-
-# Start development server
 npm run dev
 
-# Frontend runs on http://localhost:3000
+# Frontend: http://localhost:3000
 ```
 
-## 📊 Database Schema
+## 🔑 Demo / Test Credentials
 
-### Core Tables
-- **users**: User accounts & authentication
-- **portfolios**: User portfolio instances
-- **portfolio_templates**: Portfolio design templates
-- **portfolio_projects**: Projects in portfolios
-- **portfolio_skills**: Skills list
-- **portfolio_experience**: Work experience
-- **portfolio_education**: Education history
+Seeded automatically on first backend run:
 
-### Auth & Subscriptions
-- **refresh_tokens**: JWT refresh token storage
-- **subscription_plans**: Tier definitions (free, pro)
-- **user_subscriptions**: Active subscriptions
-- **payments**: Payment history
+| Role | Email | Password |
+|---|---|---|
+| Admin | `admin@portfoliox.com` | `Admin@123` |
+| User | `user@portfoliox.com` | `User@123` |
 
-### Analytics
-- **portfolio_views**: View tracking
-- **feedback**: User feedback & ratings
-- **notifications**: User notifications
+## 📡 API Overview
 
-## 🔑 Test Credentials
+All routes are under `/api`. Full interactive documentation is available via Swagger at `/swagger` once the backend is running. Main route groups:
 
-### Admin Account
-- **Email**: admin@portfoliox.com
-- **Password**: Admin@123
-- **Access**: Full admin dashboard + user management
+| Controller | Base route | Covers |
+|---|---|---|
+| `AuthController` | `/api/auth` | Register, login, OTP verification, refresh tokens, trusted devices, login history, profile, password/email change, account export/delete |
+| `PortfoliosController` | `/api/portfolios` | CRUD, templates, explore, projects, skills, experience, education, gallery, books, appointments, contact messages, likes, scoring |
+| `ResumesController` | `/api/resumes` | CRUD, scoring, experience/education/skills |
+| `UsersController` | `/api/users` | Public profiles, follow/followers |
+| `CommentsController` | `/api` | Portfolio comments, replies, comment likes |
+| `AiController` | `/api/ai` | Chat, template suggestions, portfolio/resume generation, usage tracking |
+| `BillingController` | `/api/billing` | Razorpay orders/verification, plan changes, payment history |
+| `NotificationsController` | `/api/notifications` | Mark-as-read |
+| `SupportController` | `/api/support` | Complaints, bug reports |
+| `AdminController` | `/api/admin` | User moderation, stats, analytics, complaints, bug reports |
+| `AdminSettingsController` | `/api/admin/settings` | Site settings, plans, payments/refunds, email templates, system tools |
+| `SettingsController` | `/api/settings` | User account settings |
+| `SiteController` | `/api/site-settings` | Public site configuration |
 
-### Regular User
-- **Email**: user@portfoliox.com
-- **Password**: User@123
-- **Access**: Create and manage portfolios
+## 🔐 Security Notes
 
-## 📡 API Endpoints
-
-### Authentication
-- `POST /api/auth/register` - Register new user
-- `POST /api/auth/login` - Login user
-- `POST /api/auth/refresh` - Refresh access token
-- `GET /api/auth/me` - Get current user
-- `PUT /api/auth/profile` - Update profile
-
-### Portfolios
-- `GET /api/portfolios/templates` - Get all templates
-- `POST /api/portfolios` - Create portfolio
-- `GET /api/portfolios/{id}` - Get portfolio (authenticated)
-- `GET /api/portfolios/public/{slug}` - Get public portfolio
-- `GET /api/portfolios/my-portfolios` - Get user's portfolios
-- `PUT /api/portfolios/{id}` - Update portfolio
-- `DELETE /api/portfolios/{id}` - Delete portfolio
-- `POST /api/portfolios/{id}/projects` - Add project
-- `POST /api/portfolios/{id}/skills` - Add skill
-- `POST /api/portfolios/{id}/experience` - Add experience
-- `POST /api/portfolios/{id}/education` - Add education
-
-### Admin
-- `GET /api/admin/users` - Get all users
-- `DELETE /api/admin/users/{userId}` - Delete user
-- `GET /api/admin/stats` - Get dashboard stats
-
-## 🔐 Security Features
-
-- JWT authentication with expiration
-- Refresh token rotation
-- Password hashing with BCrypt
-- CORS configured
-- Input validation
-- SQL parameterized queries (EF Core)
-- Admin-only endpoints protected
+- JWT access + refresh tokens; passwords hashed with BCrypt
+- New-device logins require email verification; trusted devices are tracked per user
+- All secrets (DB password, JWT secret, SMTP credentials, AI API key, Razorpay keys) live only in the gitignored `appsettings.Development.json` locally, or environment variables in production — never in source control
+- EF Core parameterized queries throughout
+- Admin-only endpoints are authorization-protected
 
 ## 📦 Deployment
 
 ### Frontend (Vercel/Netlify)
 ```bash
 npm run build
-# Deploy dist/ folder
+# deploy the dist/ folder
 ```
 
-### Backend (Azure/Heroku/.NET Host)
+### Backend (Azure/any .NET host)
 ```bash
 dotnet publish -c Release
-# Deploy published files
 ```
-
-### Database (AWS RDS/Azure Database for MySQL)
-- Run schema migrations
-- Update connection string in appsettings.json
-
-## 🚨 Important Configuration
-
-Update these before production:
-
-### Backend (appsettings.json)
-```json
-{
-  "ConnectionStrings": {
-    "DefaultConnection": "your_production_connection_string"
-  },
-  "Jwt": {
-    "Secret": "your-super-secret-key-at-least-32-chars-long",
-    "ExpiryInMinutes": "60"
-  }
-}
-```
-
-### Frontend (.env)
-```
-VITE_API_BASE_URL=https://your-api-domain.com/api
-VITE_APP_NAME=PortfolioX
-```
+Provide `ConnectionStrings__DefaultConnection`, `Jwt__Secret`, and the other config values as environment variables (or a production `appsettings.Production.json`) — migrations run automatically on startup, so no manual schema step is needed in production either.
 
 ## 🐛 Troubleshooting
 
-### MySQL Connection Error
-- Ensure MySQL is running: `docker-compose ps`
-- Check connection string in appsettings.Development.json
-- The database and schema are created automatically via EF Core Migrations on first run; verify with: `mysql -u root -p -e "SHOW DATABASES;"`
+**MySQL connection error**
+- Confirm MySQL is running and the credentials in `appsettings.Development.json` are correct
+- The database is created automatically via EF Core Migrations on first run
 
-### JWT Token Error
-- Ensure JWT:Secret in appsettings.json matches
-- Check token expiry in Swagger UI
+**Backend crashes on startup with no port bound**
+- Check the console output for the actual exception (commonly a bad DB connection string)
+- Confirm `ASPNETCORE_ENVIRONMENT=Development` is being set — this project's `Properties/launchSettings.json` sets it automatically for `dotnet run`
 
-### CORS Error
-- Verify frontend URL in backend CORS policy
-- Ensure API_BASE_URL in .env matches backend
+**JWT token errors**
+- Ensure `Jwt:Secret` is at least 32 characters and consistent across restarts
 
-### Port Already in Use
-- MySQL: `sudo lsof -i :3306`
-- Backend: `sudo lsof -i :5000`
-- Frontend: `sudo lsof -i :3000`
+**CORS errors**
+- Backend CORS policy is currently pinned to `http://localhost:3000` (see `Program.cs`) — update it if your frontend runs elsewhere
 
-## 📚 Project Structure
+**Port already in use**
+- MySQL: `3306` · Backend: `5000` · Frontend: `3000`
 
+## 🗄️ Schema Changes
+
+Schema is managed entirely through EF Core Migrations in `backend/src/PortfolioX.Infrastructure/Migrations/`. To change the schema:
+
+```bash
+cd backend
+# 1. Edit entities in PortfolioX.Core and mappings in PortfolioX.Infrastructure/AppDbContext.cs
+# 2. Generate a migration:
+dotnet ef migrations add <DescriptiveName> --project src/PortfolioX.Infrastructure --startup-project src/PortfolioX.API
+# 3. Restart the API (or run `dotnet ef database update`) — Program.cs applies pending migrations automatically
 ```
-portfoliox-complete/
-├── backend/
-│   └── src/
-│       ├── PortfolioX.API/    # API layer
-│       ├── PortfolioX.Core/   # Domain & DTOs
-│       ├── PortfolioX.Services/ # Business logic
-│       └── PortfolioX.Infrastructure/ # Data access + EF Core Migrations
-└── frontend/
-    └── src/
-        ├── pages/             # Route pages
-        ├── components/        # React components
-        ├── services/          # API client
-        ├── context/           # Auth context
-        └── styles/            # CSS
-```
-
-## 🎯 Next Steps
-
-1. **Customize UI**: Modify CSS in `frontend/src/styles/`
-2. **Add AI Integration**: Implement resume generation service
-3. **Payment Integration**: Stripe/Razorpay in subscription flow
-4. **Email Notifications**: SendGrid integration
-5. **CDN**: Setup for image hosting
 
 ## 📄 License
 
-MIT License - Feel free to use for personal or commercial projects.
-
-## 💬 Support
-
-For issues, questions, or contributions:
-1. Check existing issues
-2. Create detailed bug reports
-3. Submit pull requests
-4. Contact: support@portfoliox.com
+MIT License — free to use for personal or commercial projects.
 
 ---
 
-**Built with ❤️ for creators and professionals worldwide**
+**Built for creators and professionals to showcase their work.**
