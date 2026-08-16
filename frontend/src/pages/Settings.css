@@ -1,0 +1,192 @@
+.settings-page-title {
+  margin-bottom: 20px;
+}
+
+.settings-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 640px;
+}
+
+.settings-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.settings-section-title {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+.settings-muted {
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+.settings-toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+}
+
+.settings-toggle-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.settings-toggle-label {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.settings-toggle-desc {
+  color: var(--text-secondary);
+  font-size: 12px;
+  margin-top: 2px;
+  max-width: 380px;
+}
+
+.settings-switch {
+  width: 40px;
+  height: 22px;
+  border-radius: 999px;
+  background: var(--border);
+  position: relative;
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+
+.settings-switch.on {
+  background: var(--accent);
+}
+
+.settings-switch-knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  transition: var(--transition);
+}
+
+.settings-switch.on .settings-switch-knob {
+  left: 20px;
+}
+
+.settings-verified-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--accent);
+  font-size: 14px;
+}
+
+.settings-actions-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.settings-profile-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.settings-swatch-row {
+  display: flex;
+  gap: 12px;
+}
+
+.settings-swatch {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.settings-swatch.active {
+  border-color: var(--text-primary);
+  transform: scale(1.1);
+}
+
+.settings-plan-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.settings-select {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-size: 14px;
+  max-width: 320px;
+}
+
+.settings-danger-card {
+  border-color: rgba(255, 107, 107, 0.35);
+}
+
+.settings-danger-btn {
+  color: #ff6b6b;
+  border-color: rgba(255, 107, 107, 0.35);
+}
+
+.settings-danger-btn:hover:not(:disabled) {
+  border-color: #ff6b6b;
+  color: #ff6b6b;
+}
+
+.settings-faq-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.settings-faq-item {
+  border-bottom: 1px solid var(--border);
+}
+
+.settings-faq-item:last-child {
+  border-bottom: none;
+}
+
+.settings-faq-question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: left;
+}
+
+.settings-faq-chevron {
+  transition: transform 0.2s ease;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.settings-faq-chevron.open {
+  transform: rotate(180deg);
+}
+
+.settings-faq-answer {
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1.6;
+  padding-bottom: 14px;
+}

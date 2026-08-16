@@ -1,0 +1,111 @@
+.stat-card-hoverable {
+  /* .animate-in keeps its entrance animation attached (fill-mode: both never releases it),
+     which per spec makes every such card its own stacking context - without an explicit
+     z-index here, this card's popover can't paint above a later sibling card no matter what
+     z-index the popover itself has, since that only wins within this card's own context. */
+  position: relative;
+  z-index: 1;
+}
+
+.stat-card-hoverable:hover {
+  z-index: 2;
+}
+
+.stat-popover {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  max-height: 320px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 16px 40px rgba(0,0,0,.18);
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  /* visibility isn't in the transition list, so it snaps to hidden immediately on hover-out
+     instead of lingering through the opacity fade - a popover can extend into the next grid
+     row, and a lingering "visible" state there would intercept clicks meant for that card. */
+  transition: opacity .15s ease, transform .15s ease;
+  z-index: 20;
+}
+
+.stat-card-hoverable:hover .stat-popover {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.stat-popover-header {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 12px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border);
+}
+
+.stat-popover-tier-badge {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 2px 7px;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+.stat-popover-tier-badge.pro {
+  background: var(--accent);
+  color: var(--bg-primary);
+}
+
+.stat-popover-tier-badge.free {
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+}
+
+.stat-popover-list {
+  overflow-y: auto;
+  padding: 6px;
+}
+
+.stat-popover-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 6px;
+  text-align: left;
+  transition: var(--transition);
+}
+
+.stat-popover-item:hover {
+  background: var(--bg-secondary);
+}
+
+.stat-popover-primary {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.stat-popover-secondary {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.stat-popover-empty {
+  padding: 16px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  text-align: center;
+}

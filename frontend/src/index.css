@@ -1,0 +1,127 @@
+/* Light is the default theme; dark is opted into via [data-theme="dark"] on <html>,
+   set by ThemeContext (context/ThemeContext.jsx) and persisted to localStorage. */
+:root {
+  --bg-primary: #F5F6FA;
+  --bg-secondary: #FFFFFF;
+  --bg-card: #FFFFFF;
+  --accent: #4F6FE0;
+  --accent-hover: #3D5BC7;
+  --accent-rgb: 79,111,224;
+  --text-primary: #14161C;
+  --text-secondary: #5B6272;
+  --border: #E3E6ED;
+  --shadow: 0 8px 30px rgba(20,22,28,.08);
+  --radius: 16px;
+  --transition: .2s cubic-bezier(.4,0,.2,1);
+}
+
+:root[data-theme="dark"] {
+  --bg-primary: #0A0D14;
+  --bg-secondary: #10141E;
+  --bg-card: #161B27;
+  --accent: #6C8EFF;
+  --accent-hover: #5474E0;
+  --accent-rgb: 108,142,255;
+  --text-primary: #EDEFF4;
+  --text-secondary: #98A2B8;
+  --border: rgba(108,142,255,.15);
+  --shadow: 0 8px 30px rgba(0,0,0,.35);
+}
+
+/* Additional dark-family themes (Settings > Appearance theme picker), each validated
+   with the dataviz skill's validate_palette.js for chroma floor and contrast-vs-surface
+   the same way the existing dark theme's accent pairs were. */
+:root[data-theme="ocean"] {
+  --bg-primary: #071A24;
+  --bg-secondary: #0D2733;
+  --bg-card: #123340;
+  --accent: #2DD4E8;
+  --accent-hover: #1FB8CC;
+  --accent-rgb: 45,212,232;
+  --text-primary: #E7F6F9;
+  --text-secondary: #8FB4BF;
+  --border: rgba(45,212,232,.15);
+  --shadow: 0 8px 30px rgba(0,20,26,.4);
+}
+
+:root[data-theme="sunset"] {
+  --bg-primary: #241016;
+  --bg-secondary: #33161D;
+  --bg-card: #3E1C24;
+  --accent: #FF7A59;
+  --accent-hover: #E5613F;
+  --accent-rgb: 255,122,89;
+  --text-primary: #FBEAE4;
+  --text-secondary: #C99A8E;
+  --border: rgba(255,122,89,.18);
+  --shadow: 0 8px 30px rgba(30,8,12,.4);
+}
+
+:root[data-theme="midnight-purple"] {
+  --bg-primary: #12081F;
+  --bg-secondary: #1A0E2B;
+  --bg-card: #221537;
+  --accent: #A78BFA;
+  --accent-hover: #8B6DF0;
+  --accent-rgb: 167,139,250;
+  --text-primary: #EFE9FC;
+  --text-secondary: #A896C4;
+  --border: rgba(167,139,250,.18);
+  --shadow: 0 8px 30px rgba(10,4,20,.45);
+}
+
+/* Accent color presets (Appearance settings). "indigo" is the default above - no override
+   needed. Each pair validated with the dataviz skill's validate_palette.js for chroma floor,
+   contrast-vs-surface, and normal-vision separation against both card surfaces. */
+:root[data-accent="teal"] { --accent: #0D9488; --accent-hover: #0B7A70; --accent-rgb: 13,148,136; }
+:root[data-theme="dark"][data-accent="teal"] { --accent: #14B8A6; --accent-hover: #0F9C8C; --accent-rgb: 20,184,166; }
+
+:root[data-accent="rose"] { --accent: #C2417A; --accent-hover: #A83567; --accent-rgb: 194,65,122; }
+:root[data-theme="dark"][data-accent="rose"] { --accent: #EA5A94; --accent-hover: #D94480; --accent-rgb: 234,90,148; }
+
+:root[data-accent="amber"] { --accent: #B8720B; --accent-hover: #9C5F09; --accent-rgb: 184,114,11; }
+:root[data-theme="dark"][data-accent="amber"] { --accent: #DDA02E; --accent-hover: #C88C1E; --accent-rgb: 221,160,46; }
+
+/* Font size (Appearance settings): a scale multiplier applied at the root so rem-based sizing
+   throughout the app grows/shrinks together. */
+:root { --font-scale: 1; }
+:root[data-font-size="small"] { --font-scale: 0.9; }
+:root[data-font-size="large"] { --font-scale: 1.125; }
+html { font-size: calc(16px * var(--font-scale)); }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color .2s ease, color .2s ease;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+  border: none;
+  background: none;
+}
+
+input, textarea, select {
+  font-family: inherit;
+  color: inherit;
+}

@@ -1,0 +1,29 @@
+.site-footer {
+  border-top: 1px solid var(--border);
+  background: var(--bg-secondary);
+  padding: 20px 0;
+  margin-top: auto;
+}
+
+.site-footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  color: var(--text-secondary);
+  font-size: 13px;
+  text-align: center;
+}
+
+.site-footer-text {
+  color: var(--text-secondary);
+}
+
+.site-footer-text::before {
+  content: '\2022';
+  margin-right: 16px;
+}

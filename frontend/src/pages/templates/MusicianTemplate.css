@@ -1,0 +1,418 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700&display=swap');
+
+/* Full-bleed breakout from the app's centered .main-content wrapper */
+.musician-template {
+  width: 100vw;
+  max-width: 100vw;
+  margin: -20px calc(-50vw + 50%);
+  overflow-x: hidden;
+
+  --ms-black: #0b0b0d;
+  --ms-charcoal: #17171b;
+  --ms-charcoal-high: #202026;
+  --ms-cream: #f5f3ee;
+  --ms-red: #e8432f;
+  --ms-red-dim: rgba(232, 67, 47, 0.15);
+  --ms-muted: #9a99a3;
+
+  background: var(--ms-cream);
+  color: var(--ms-black);
+  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.6;
+}
+
+body:has(.musician-template) {
+  overflow-x: hidden;
+}
+
+.musician-template h1,
+.musician-template h2,
+.musician-template h3,
+.musician-template h4 {
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 0.02em;
+  font-weight: 400;
+}
+
+.ms-eyebrow {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ms-red);
+  margin-bottom: 12px;
+}
+
+.ms-section {
+  padding: 88px 24px;
+}
+
+.ms-section-dark {
+  background: var(--ms-charcoal);
+  color: var(--ms-cream);
+}
+
+.ms-section-dark .ms-eyebrow {
+  color: var(--ms-red);
+}
+
+.ms-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.ms-container h2 {
+  font-size: 44px;
+  margin-bottom: 40px;
+}
+
+/* Nav */
+.ms-nav {
+  background: var(--ms-black);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.ms-nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.ms-brand {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 26px;
+  letter-spacing: 0.04em;
+  color: var(--ms-cream);
+}
+
+.ms-nav-links {
+  display: flex;
+  gap: 32px;
+}
+
+.ms-nav-links a {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ms-muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.ms-nav-links a:hover {
+  color: var(--ms-red);
+}
+
+/* Hero */
+.ms-hero {
+  position: relative;
+  min-height: 78vh;
+  display: flex;
+  align-items: flex-end;
+  background: var(--ms-black);
+}
+
+.ms-hero-photo {
+  position: absolute;
+  inset: 0;
+}
+
+.ms-hero-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.55;
+}
+
+.ms-hero-photo-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 140px;
+  color: var(--ms-charcoal-high);
+}
+
+.ms-hero-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, var(--ms-black) 10%, transparent 65%);
+}
+
+.ms-hero-content {
+  position: relative;
+  z-index: 1;
+  padding: 64px 24px;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  color: var(--ms-cream);
+}
+
+.ms-hero-title {
+  font-size: clamp(3rem, 8vw, 6rem);
+  line-height: 0.95;
+  margin-bottom: 20px;
+}
+
+.ms-hero-blurb {
+  font-size: 18px;
+  color: var(--ms-muted);
+  max-width: 60ch;
+  margin: 0 auto 32px;
+}
+
+.ms-hero-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.ms-btn {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 16px 36px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 2px;
+}
+
+.ms-btn-solid {
+  background: var(--ms-red);
+  color: var(--ms-cream);
+  border: 1px solid var(--ms-red);
+}
+
+.ms-btn-solid:hover {
+  opacity: 0.88;
+}
+
+.ms-btn-ghost {
+  background: transparent;
+  color: var(--ms-cream);
+  border: 1px solid var(--ms-cream);
+}
+
+.ms-btn-ghost:hover {
+  background: var(--ms-cream);
+  color: var(--ms-black);
+}
+
+/* Releases */
+.ms-releases-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.ms-release-card {
+  background: #fff;
+  border: 1px solid rgba(11, 11, 13, 0.08);
+  padding: 24px;
+}
+
+.ms-release-art {
+  aspect-ratio: 1 / 1;
+  background: var(--ms-red-dim);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ms-red);
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.ms-release-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ms-release-card h3 {
+  font-size: 22px;
+  margin-bottom: 8px;
+}
+
+.ms-release-card p {
+  font-size: 14px;
+  color: #55535e;
+  margin-bottom: 12px;
+}
+
+.ms-tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.ms-tag {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 10px;
+  background: var(--ms-red-dim);
+  color: var(--ms-red);
+}
+
+.ms-release-link {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ms-red);
+  text-decoration: none;
+}
+
+/* Gallery */
+.ms-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.ms-gallery-card {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--ms-charcoal-high);
+}
+
+.ms-gallery-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ms-gallery-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 12px 14px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  color: var(--ms-cream);
+  font-size: 12px;
+}
+
+/* Skills */
+.ms-skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.ms-skill-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 18px;
+  background: #fff;
+  border: 1px solid rgba(11, 11, 13, 0.1);
+}
+
+.ms-skill-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ms-red);
+}
+
+/* Timeline */
+.ms-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.ms-timeline-item {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 24px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.ms-section:not(.ms-section-dark) .ms-timeline-item {
+  border-bottom-color: rgba(11, 11, 13, 0.1);
+}
+
+.ms-timeline-date {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ms-red);
+}
+
+.ms-timeline-role {
+  font-size: 14px;
+  color: var(--ms-muted);
+  margin: 4px 0 8px;
+}
+
+.ms-section:not(.ms-section-dark) .ms-timeline-role,
+.ms-section:not(.ms-section-dark) .ms-timeline-desc {
+  color: #55535e;
+}
+
+.ms-timeline-desc {
+  font-size: 14px;
+  color: var(--ms-muted);
+}
+
+/* Footer */
+.ms-footer {
+  background: var(--ms-black);
+  color: var(--ms-cream);
+  padding: 48px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.ms-footer-brand {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+}
+
+.ms-footer-meta {
+  font-size: 12px;
+  color: var(--ms-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+@media (max-width: 900px) {
+  .ms-timeline-item {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .ms-gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .ms-gallery-grid {
+    grid-template-columns: 1fr;
+  }
+}

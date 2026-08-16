@@ -1,0 +1,51 @@
+.public-portfolio-social-bar {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  box-shadow: var(--shadow);
+  padding: 8px;
+  z-index: 150;
+}
+
+.public-portfolio-social-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.public-portfolio-social-btn:hover {
+  background: rgba(var(--accent-rgb), .1);
+  color: var(--accent);
+}
+
+.public-portfolio-social-btn.liked {
+  color: #E5484D;
+}
+
+.public-portfolio-social-btn.liked:hover {
+  background: rgba(229, 72, 77, .1);
+}
+
+@media (max-width: 480px) {
+  .public-portfolio-social-bar {
+    bottom: 16px;
+    padding: 6px;
+  }
+
+  .public-portfolio-social-btn {
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+}

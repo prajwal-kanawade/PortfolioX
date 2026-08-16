@@ -1,0 +1,117 @@
+.security-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.security-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+}
+
+.security-row-info {
+  flex: 1;
+}
+
+.security-row-title {
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.security-row-meta {
+  color: var(--text-secondary);
+  font-size: 13px;
+  margin-top: 2px;
+}
+
+.security-badge {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+  color: var(--accent);
+  background: rgba(var(--accent-rgb), .1);
+  border: 1px solid var(--border);
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+.security-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 360px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+}
+
+.security-search input {
+  flex: 1;
+  background: none;
+  border: none;
+  outline: none;
+  color: var(--text-primary);
+  font-size: 14px;
+}
+
+.security-table-card {
+  padding: 0;
+  overflow: hidden;
+}
+
+.security-table-scroll {
+  max-height: 420px;
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+.security-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.security-table th,
+.security-table td {
+  text-align: left;
+  padding: 12px 16px;
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.security-table th {
+  position: sticky;
+  top: 0;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  font-weight: 600;
+  border-bottom: 2px solid var(--border);
+  z-index: 1;
+}
+
+.security-table tbody tr:nth-child(even) {
+  /* bg-secondary is the same white as the card in light mode, so stripes would be
+     invisible there - bg-primary (the page background) is reliably distinct from the
+     card surface in both themes. */
+  background: var(--bg-primary);
+}
+
+.security-table tbody tr:hover {
+  background: rgba(var(--accent-rgb), .06);
+}
+
+.security-status-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: normal;
+}

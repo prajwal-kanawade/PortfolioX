@@ -1,0 +1,353 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=Hanken+Grotesk:wght@400;500;600&display=swap');
+
+/* Full-bleed breakout from the app's centered .main-content wrapper */
+.writer-template {
+  width: 100vw;
+  max-width: 100vw;
+  margin: -20px calc(-50vw + 50%);
+  overflow-x: hidden;
+
+  --wr-paper: #fbf9f4;
+  --wr-paper-white: #f9f7f2;
+  --wr-surface-container: #f0eee9;
+  --wr-surface-container-high: #eae8e3;
+  --wr-ink: #0d0c22;
+  --wr-on-surface-variant: #47464d;
+  --wr-parchment-deep: #d6cbb8;
+  --wr-oxblood: #4a0e0e;
+
+  background: var(--wr-paper);
+  color: var(--wr-ink);
+  font-family: 'Source Serif 4', Georgia, serif;
+  line-height: 1.6;
+}
+
+body:has(.writer-template) {
+  overflow-x: hidden;
+}
+
+.writer-template h1,
+.writer-template h2,
+.writer-template h3,
+.writer-template h4 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.wr-label {
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--wr-on-surface-variant);
+}
+
+.wr-section {
+  padding: 96px 24px;
+}
+
+.wr-container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.wr-divider {
+  width: 100%;
+  height: 1px;
+  background: var(--wr-parchment-deep);
+  opacity: 0.5;
+}
+
+/* Nav */
+.wr-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--wr-paper-white);
+}
+
+.wr-nav-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.wr-brand {
+  font-size: 24px;
+  letter-spacing: -0.02em;
+}
+
+.wr-nav-links {
+  display: flex;
+  gap: 40px;
+}
+
+.wr-nav-links a {
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--wr-ink);
+  text-decoration: none;
+}
+
+.wr-nav-links a:hover {
+  color: var(--wr-oxblood);
+}
+
+/* Hero */
+.wr-hero {
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  gap: 32px;
+  align-items: center;
+}
+
+.wr-hero-title {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  line-height: 1.1;
+  margin-bottom: 24px;
+}
+
+.wr-hero-title em {
+  color: var(--wr-oxblood);
+  font-style: italic;
+}
+
+.wr-hero-blurb {
+  font-size: 20px;
+  color: var(--wr-on-surface-variant);
+  max-width: 560px;
+  margin-bottom: 32px;
+}
+
+.wr-hero-actions {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.wr-btn {
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 16px 32px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.wr-btn-solid {
+  background: var(--wr-ink);
+  color: var(--wr-paper-white);
+  border: 1px solid var(--wr-ink);
+}
+
+.wr-btn-solid:hover {
+  opacity: 0.9;
+}
+
+.wr-btn-ghost {
+  background: transparent;
+  color: var(--wr-ink);
+  border: 1px solid var(--wr-ink);
+}
+
+.wr-btn-ghost:hover {
+  background: var(--wr-ink);
+  color: var(--wr-paper-white);
+}
+
+.wr-portrait {
+  aspect-ratio: 4 / 5;
+  background: var(--wr-surface-container);
+  overflow: hidden;
+  position: relative;
+}
+
+.wr-portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1) brightness(0.95);
+}
+
+.wr-portrait-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 64px;
+  color: var(--wr-on-surface-variant);
+}
+
+.wr-portrait-frame {
+  position: absolute;
+  inset: 16px;
+  border: 1px solid rgba(13, 12, 34, 0.1);
+  pointer-events: none;
+}
+
+/* Bookshelf */
+.wr-bookshelf-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 64px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.wr-books-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px;
+}
+
+.wr-book-card:nth-child(2) {
+  padding-top: 96px;
+}
+
+.wr-book-cover {
+  aspect-ratio: 3 / 4;
+  margin-bottom: 32px;
+  overflow: hidden;
+  background: var(--wr-surface-container-high);
+  border: 1px solid var(--wr-parchment-deep);
+}
+
+.wr-book-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.wr-book-cover-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  color: var(--wr-on-surface-variant);
+}
+
+.wr-book-meta {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.wr-book-title {
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+.wr-book-desc {
+  color: var(--wr-on-surface-variant);
+  font-size: 17px;
+}
+
+.wr-bookshelf-empty {
+  border: 1px dashed var(--wr-parchment-deep);
+  padding: 64px 24px;
+  text-align: center;
+  color: var(--wr-on-surface-variant);
+  grid-column: 1 / -1;
+}
+
+/* Literary timeline (TOC style) */
+.wr-toc {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.wr-toc-entry {
+  margin-bottom: 48px;
+}
+
+.wr-toc-entry:last-child {
+  margin-bottom: 0;
+}
+
+.wr-toc-row {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+}
+
+.wr-toc-row::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px dotted var(--wr-parchment-deep);
+  order: 1;
+}
+
+.wr-toc-title {
+  font-size: 24px;
+  white-space: nowrap;
+}
+
+.wr-toc-date {
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--wr-on-surface-variant);
+  order: 2;
+  white-space: nowrap;
+}
+
+.wr-toc-desc {
+  margin-top: 16px;
+  font-size: 17px;
+  color: var(--wr-on-surface-variant);
+  font-style: italic;
+}
+
+/* Footer */
+.wr-footer {
+  background: var(--wr-surface-container);
+  border-top: 1px solid var(--wr-parchment-deep);
+  padding: 64px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.wr-footer-brand {
+  font-size: 22px;
+}
+
+.wr-footer-meta {
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  color: var(--wr-on-surface-variant);
+}
+
+@media (max-width: 900px) {
+  .wr-hero {
+    grid-template-columns: 1fr;
+  }
+  .wr-books-grid {
+    grid-template-columns: 1fr;
+  }
+  .wr-book-card:nth-child(2) {
+    padding-top: 0;
+  }
+  .wr-toc-title {
+    white-space: normal;
+  }
+}

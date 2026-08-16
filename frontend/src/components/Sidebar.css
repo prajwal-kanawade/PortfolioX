@@ -1,0 +1,144 @@
+.app-sidebar-layout {
+  display: flex;
+  gap: 28px;
+  align-items: flex-start;
+}
+
+.app-sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 88px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: width var(--transition);
+}
+
+.app-sidebar-collapsed {
+  width: 72px;
+}
+
+.app-sidebar-toggle {
+  align-self: flex-end;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  color: var(--text-secondary);
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+
+.app-sidebar-toggle:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.app-sidebar-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  overflow: hidden;
+}
+
+.app-sidebar-collapsed .app-sidebar-header {
+  padding: 12px;
+  justify-content: center;
+}
+
+.app-sidebar-collapsed .app-sidebar-header .dashboard-sidebar-name,
+.app-sidebar-collapsed .app-sidebar-header .nav-pro-badge {
+  display: none;
+}
+
+.app-sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 10px;
+}
+
+.app-sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+  transition: var(--transition);
+  text-align: left;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.app-sidebar-link-icon {
+  flex-shrink: 0;
+}
+
+.app-sidebar-collapsed .app-sidebar-link {
+  justify-content: center;
+  padding: 10px;
+}
+
+.app-sidebar-collapsed .app-sidebar-label {
+  display: none;
+}
+
+.app-sidebar-link:hover {
+  background: rgba(var(--accent-rgb), .08);
+  color: var(--accent);
+}
+
+.app-sidebar-link.active {
+  background: var(--accent);
+  color: var(--bg-primary);
+}
+
+.app-sidebar-main {
+  flex: 1;
+  min-width: 0;
+}
+
+@media (max-width: 860px) {
+  .app-sidebar-layout {
+    flex-direction: column;
+    /* Base rule sets align-items: flex-start for the desktop row layout, which would
+       otherwise shrink the stacked sidebar/main to their content width instead of the
+       full viewport width. */
+    align-items: stretch;
+  }
+
+  .app-sidebar {
+    width: 100% !important;
+    position: static;
+  }
+
+  .app-sidebar-nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .app-sidebar-collapsed .app-sidebar-label {
+    display: inline;
+  }
+
+  .app-sidebar-collapsed .app-sidebar-header .dashboard-sidebar-name,
+  .app-sidebar-collapsed .app-sidebar-header .nav-pro-badge {
+    display: block;
+  }
+}

@@ -1,0 +1,30 @@
+.contact-form-section {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 40px 20px 60px;
+}
+
+.contact-form-card h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+}
+
+.contact-form-disabled {
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.contact-form-success {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--accent);
+  font-size: 14px;
+  padding: 14px;
+  background: rgba(var(--accent-rgb), .08);
+  border-radius: 10px;
+}

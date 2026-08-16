@@ -1,0 +1,27 @@
+# .NET
+**/bin/
+**/obj/
+**/*.user
+**/appsettings.Development.json
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+frontend/.env.*.local
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# IDE
+.vscode/
+.idea/
+*.suo
+*.sln.DotSettings
+
+# Database
+*.db
+*.sqlite

@@ -1,0 +1,125 @@
+.upgrade-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.upgrade-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 24px;
+  max-width: 900px;
+  width: 100%;
+  align-items: start;
+}
+
+.upgrade-summary {
+  text-align: left;
+}
+
+.upgrade-badge {
+  display: inline-block;
+  background: rgba(var(--accent-rgb), 0.12);
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 12px;
+  border-radius: 999px;
+  margin-bottom: 12px;
+}
+
+.upgrade-summary h1 {
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+.upgrade-summary h1 small {
+  font-size: 16px;
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+
+.upgrade-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.upgrade-features li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-primary);
+}
+
+.upgrade-features li svg {
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.upgrade-note {
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+.upgrade-form-card h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+.upgrade-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.btn-full {
+  width: 100%;
+}
+
+.upgrade-success {
+  max-width: 480px;
+  text-align: center;
+  padding: 48px 32px;
+}
+
+.upgrade-success-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(var(--accent-rgb), 0.12);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+}
+
+.upgrade-success h1 {
+  margin-bottom: 12px;
+}
+
+.upgrade-success p {
+  color: var(--text-secondary);
+  margin-bottom: 28px;
+}
+
+.upgrade-success-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 720px) {
+  .upgrade-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,103 @@
+.user-profile-page {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 20px 20px 60px;
+}
+
+.user-profile-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 32px;
+  transition: var(--transition);
+}
+
+.user-profile-back:hover {
+  color: var(--accent);
+}
+
+.user-profile-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 48px 32px;
+  text-align: center;
+}
+
+.user-profile-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin: 0 auto 24px;
+  overflow: hidden;
+  background: var(--accent);
+  color: var(--bg-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  font-weight: 700;
+}
+
+.user-profile-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.user-profile-username {
+  font-size: 22px;
+  margin-bottom: 4px;
+}
+
+.user-profile-name {
+  color: var(--text-secondary);
+  font-size: 15px;
+  margin-bottom: 16px;
+}
+
+.user-profile-follow-counts {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  margin-bottom: 20px;
+}
+
+.user-profile-follow-count {
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.user-profile-follow-count:hover {
+  color: var(--accent);
+}
+
+.user-profile-follow-count strong {
+  color: var(--text-primary);
+  font-weight: 700;
+  margin-right: 4px;
+}
+
+.user-profile-follow-btn {
+  margin-bottom: 24px;
+}
+
+.user-profile-bio {
+  color: var(--text-primary);
+  font-size: 15px;
+  line-height: 1.6;
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+.user-profile-empty {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 48px 32px;
+  text-align: center;
+  color: var(--text-secondary);
+}

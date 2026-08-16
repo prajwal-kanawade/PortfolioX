@@ -1,0 +1,22 @@
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.animate-in {
+  /* Matches the app's --transition easing curve (index.css) - can't reuse the variable
+     directly since it's a full "duration timing-function" shorthand, not just the curve. */
+  animation: fadeSlideIn .4s cubic-bezier(.4, 0, .2, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-in {
+    animation: none;
+  }
+}
