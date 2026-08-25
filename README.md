@@ -297,7 +297,7 @@ dotnet ef migrations add <DescriptiveName> --project src/PortfolioX.Infrastructu
 
 ## 📄 License
 
-Licensed under the **MIT License** — free to use for personal or commercial projects.
+Free to use for personal projects.
 
 ---
 
